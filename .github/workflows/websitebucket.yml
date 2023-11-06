@@ -1,4 +1,4 @@
-name: Deploy/Teardown Images Bucket
+name: Deploy/Teardown Website Bucket
 
 on:
   workflow_dispatch:
