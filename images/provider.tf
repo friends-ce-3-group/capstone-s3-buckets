@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket = "sctp-ce3-tfstate-bucket-1"
-    key    = "terraform-friends-ce-3-group-s3-website.tfstate"
+    key    = "friends-ce-3-group-capstone-infra-s3-images.tfstate"
     region = "us-east-1"
   }
 }
