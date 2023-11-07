@@ -52,6 +52,9 @@ resource "aws_api_gateway_rest_api" "image_upload_api" {
     "image/png",
     "image/gif"
   ]
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
 }
 
 # create a resource path for the REST API /{bucket}/
@@ -82,8 +85,8 @@ resource "aws_api_gateway_method" "put_method" {
   http_method   = "PUT"
   authorization = "NONE"
   request_parameters = {
-    "method.request.path.bucket" = true,
-    "method.request.path.folder" = true,
+    "method.request.path.bucket"   = true,
+    "method.request.path.folder"   = true,
     "method.request.path.filename" = true,
   }
 }
@@ -97,14 +100,38 @@ resource "aws_api_gateway_integration" "s3_integration" {
   integration_http_method = "PUT"
   credentials             = aws_iam_role.api_gateway_iam_role.arn
   #uri                     = "arn:aws:apigateway:${var.region}:s3:path//"
-  uri                     = "arn:aws:apigateway:${var.region}:s3:path/{bucket}/{folder}/{filename}"
+  uri = "arn:aws:apigateway:${var.region}:s3:path/{bucket}/{folder}/{filename}"
   request_parameters = {
-    "integration.request.path.bucket" = "method.request.path.bucket",
-    "integration.request.path.folder" = "method.request.path.folder",
+    "integration.request.path.bucket"   = "method.request.path.bucket",
+    "integration.request.path.folder"   = "method.request.path.folder",
     "integration.request.path.filename" = "method.request.path.filename",
   }
 
 }
+
+resource "aws_api_gateway_integration_response" "IntegrationResponse200" {
+  depends_on  = [aws_api_gateway_integration.s3_integration]
+  rest_api_id = aws_api_gateway_rest_api.image_upload_api.id
+  resource_id = aws_api_gateway_resource.filename.id
+  http_method = aws_api_gateway_method.put_method.http_method
+  status_code = aws_api_gateway_method_response.Status200.status_code
+}
+
+
+resource "aws_api_gateway_method_response" "Status200" {
+  depends_on  = [aws_api_gateway_integration.s3_integration]
+  rest_api_id = aws_api_gateway_rest_api.image_upload_api.id
+  resource_id = aws_api_gateway_resource.filename.id
+  http_method = aws_api_gateway_method.put_method.http_method
+  status_code = "200"
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
+
+
+
 
 resource "aws_api_gateway_deployment" "api-deployment" {
   depends_on  = [aws_api_gateway_integration.s3_integration]
