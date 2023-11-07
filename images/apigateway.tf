@@ -115,6 +115,10 @@ resource "aws_api_gateway_integration_response" "IntegrationResponse200" {
   resource_id = aws_api_gateway_resource.filename.id
   http_method = aws_api_gateway_method.put_method.http_method
   status_code = aws_api_gateway_method_response.Status200.status_code
+
+  response_templates = {
+    "application/json" = ""
+  }
 }
 
 
