@@ -14,3 +14,8 @@ resource "aws_s3_object" "thumbnails" {
   bucket = aws_s3_bucket.s3_images.id
   key    = "${var.thumbnails_folder}/"
 }
+
+resource "aws_s3_bucket_notification" "eventbridge_notification" {
+  bucket = aws_s3_bucket.s3_images.id
+  eventbridge = true
+}
