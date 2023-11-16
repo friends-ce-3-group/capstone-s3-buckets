@@ -49,9 +49,9 @@ data "aws_iam_policy_document" "allow_access_from_cloudfront" {
 }
 
 resource "aws_s3_bucket_policy" "all_access_from_cloudfront" {
-  bucket = aws_s3_bucket.s3_website.id
-  policy = data.aws_iam_policy_document.allow_access_from_cloudfront.json
-  depends_on = [ aws_s3_bucket_public_access_block.block_public_options ]
+  bucket     = aws_s3_bucket.s3_website.id
+  policy     = data.aws_iam_policy_document.allow_access_from_cloudfront.json
+  depends_on = [aws_s3_bucket_public_access_block.block_public_options]
 }
 
 // S3 -> Properties -> Static website hosting
