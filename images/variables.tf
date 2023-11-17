@@ -10,6 +10,10 @@ variable "thumbnails_folder" {
   type = string
 }
 
+variable "resized_folder" {
+  type = string
+}
+
 variable "region" {
   type = string
 }
