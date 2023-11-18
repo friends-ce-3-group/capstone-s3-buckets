@@ -32,9 +32,9 @@ data "aws_iam_policy_document" "cloudfront" {
     resources = ["arn:aws:s3:::${var.proj_name}/*"]
 
     condition {
-      test     = "StringLike"
-      variable = "AWS:SourceArn"
-      values   = ["arn:aws:cloudfront::255945442255:distribution"]
+      test     = "StringEquals"
+      variable = "AWS:SourceAccount"
+      values   = ["255945442255"]
     }
   }
 }
