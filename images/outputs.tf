@@ -7,7 +7,7 @@ output "s3_bucket_images_regional_domain_name" {
 }
 
 output "api_gateway_invoke_url" {
-  value = aws_api_gateway_deployment.api-deployment.invoke_url
+  value = aws_api_gateway_stage.api-stage.invoke_url
 }
 
 output "api_gateway_stage_arn" {
@@ -21,7 +21,7 @@ resource "local_file" "write_images_url" {
 }
 
 resource "local_file" "write_upload_images_url" {
-  content  = "API_GATEWAY_UPLOAD_IMAGES_URL=${aws_api_gateway_deployment.api-deployment.invoke_url}"
+  content  = "API_GATEWAY_UPLOAD_IMAGES_URL=${aws_api_gateway_stage.api-stage.invoke_url}"
   filename = "${path.module}/api_gateway_upload_images_url.dat"
 }
 
