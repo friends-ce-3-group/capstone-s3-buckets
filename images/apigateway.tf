@@ -256,7 +256,7 @@ resource "aws_api_gateway_integration_response" "options_integration_response" {
 resource "aws_api_gateway_deployment" "api-deployment" {
   depends_on  = [aws_api_gateway_integration.options_integration, aws_api_gateway_integration.s3_integration]
   rest_api_id = aws_api_gateway_rest_api.image_upload_api.id
-  stage_name  = "dev"
+  stage_name  = ""
   //triggers = {
   //  redeployment = sha1(jsonencode(aws_api_gateway_rest_api.image_upload_api.body))
   //}
@@ -266,8 +266,8 @@ resource "aws_api_gateway_deployment" "api-deployment" {
   //}
 }
 
-//resource "aws_api_gateway_stage" "api-stage" {
-//  deployment_id = aws_api_gateway_deployment.api-deployment.id
-//  rest_api_id = aws_api_gateway_rest_api.image_upload_api.id
-//  stage_name = "dev"
-//}
+resource "aws_api_gateway_stage" "api-stage" {
+  deployment_id = aws_api_gateway_deployment.api-deployment.id
+  rest_api_id = aws_api_gateway_rest_api.image_upload_api.id
+  stage_name = "dev"
+}
