@@ -140,7 +140,7 @@ resource "aws_api_gateway_integration_response" "IntegrationResponse200" {
   http_method = aws_api_gateway_method.put_method.http_method
   status_code = aws_api_gateway_method_response.Status200.status_code
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Aws-Waf-Token'",
     "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
     "method.response.header.Access-Control-Allow-Origin"  = "'*'"
   }
@@ -172,7 +172,7 @@ resource "aws_api_gateway_gateway_response" "StatusCode4XX" {
   }
 
   response_parameters = {
-    "gatewayresponse.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "gatewayresponse.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Aws-Waf-Token'",
     "gatewayresponse.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
     "gatewayresponse.header.Access-Control-Allow-Origin"  = "'*'"
   }
@@ -188,7 +188,7 @@ resource "aws_api_gateway_gateway_response" "StatusCode5XX" {
   }
 
   response_parameters = {
-    "gatewayresponse.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "gatewayresponse.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Aws-Waf-Token'",
     "gatewayresponse.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
     "gatewayresponse.header.Access-Control-Allow-Origin"  = "'*'"
   }
@@ -238,7 +238,7 @@ resource "aws_api_gateway_integration_response" "options_integration_response" {
   status_code = aws_api_gateway_method_response.options_200.status_code
 
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Aws-Waf-Token'",
     "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
     "method.response.header.Access-Control-Allow-Origin"  = "'*'"
   }
