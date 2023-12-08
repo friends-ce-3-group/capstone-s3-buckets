@@ -32,6 +32,13 @@ resource "aws_s3_bucket_acl" "s3_bucket_acl" {
   depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_acl_ownership]
 }
 
+resource "aws_s3_bucket_versioning" "s3_bucket_versioning" {
+  bucket = aws_s3_bucket.s3_website.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 // S3 -> Permissions -> Bucket Policy
 data "aws_iam_policy_document" "allow_access_from_cloudfront" {
   statement {
